@@ -8,6 +8,7 @@ import Review from './pages/review/Review';
 import Message from './pages/message/Message';
 import Profile from './pages/profile/Profile';
 import PropertyDetail from './modules/property/PropertyDetail';
+import AgentDetail from './modules/agent/AgentDetail';
 
 function App() {
 	return (
@@ -18,6 +19,7 @@ function App() {
 					<Route path='property' element={<Property />} />
 					<Route path='property/:slug' element={<PropertyDetail />} />
 					<Route path='agent' element={<Agent />} />
+					<Route path='agent/:slug' element={<AgentDetail />} />
 					<Route path='review' element={<Review />} />
 					<Route path='message' element={<Message />} />
 					<Route path='profile' element={<Profile />} />

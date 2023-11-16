@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { TSidebar } from '../../types/sidebar.types';
+import React, { useEffect, useState } from 'react';
 
 export const SidebarItems: TSidebar[] = [
 	{
@@ -156,17 +157,34 @@ export const SidebarItems: TSidebar[] = [
 	},
 ];
 
-const SideBar = () => {
+const SideBar: React.FC = () => {
 	const location = useLocation();
+	const [selectedPath, setSelectedPath] = useState('');
+	useEffect(() => {
+		const savedPath = localStorage.getItem('selectedPath');
+		if (savedPath) {
+			setSelectedPath(savedPath);
+		}
+	}, []);
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const handleLinkClick = (path: any) => {
+		localStorage.setItem('selectedPath', path);
+		setSelectedPath(path);
+	};
+
 	return (
-		<div className='w-[16%] flex flex-col px-4 pt-[25px] pb-4 gap-1'>
+		<div className='w-[20%] flex flex-col px-4 pt-[25px] pb-4 gap-1'>
 			{SidebarItems.map((item) => (
 				<Link
 					to={item.path}
 					key={item.title}
 					className={`flex items-center px-6 py-4 text-base font-bold gap-[10px] text-[#808191] rounded-lg ${
-						location.pathname === item.path ? 'bg-[#475BE8] text-[#FCFCFC]' : 'hover:text-[#475BE8]'
+						location.pathname === item.path || selectedPath === item.path
+							? 'bg-[#475BE8] text-[#FCFCFC]'
+							: 'hover:text-[#475BE8]'
 					}`}
+					onClick={() => handleLinkClick(item.path)}
 				>
 					<span>{item.icon}</span>
 					<p>{item.title}</p>
