@@ -14,7 +14,7 @@ const Review = () => {
 					</div>
 				</div>
 				<div className='mt-5 p-4 bg-[#FCFCFC] rounded-2xl'>
-					<div className='grid grid-cols-1 mt-5'>
+					<div className='grid grid-cols-1'>
 						{Array(1)
 							.fill(0)
 							.map((index) => (
